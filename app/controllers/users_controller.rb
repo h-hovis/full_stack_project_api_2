@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        user = User.find(params[:id])
         render json: UserBlueprint.render(@user, view: :normal), status: :ok
     end
 
@@ -21,6 +22,9 @@ class UsersController < ApplicationController
     end
 
     def update
+        user = User.find(params[:id])
+        user.update(user_params)
+
         if @user.update(user_params)
             render json: UserBlueprint.render(@user, view: :normal), status: :ok
         else
@@ -29,6 +33,9 @@ class UsersController < ApplicationController
     end
 
     def destroy
+        user = User.find(params[:id])
+        user.destroy
+
         if @user.destroy
             render json: nil, status: :ok
         else

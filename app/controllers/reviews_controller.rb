@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
     end
 
     def show
+        review = Review.find(params[:id])
         render json: ReviewBlueprint.render(review, view: :normal), status: :ok
     end
 
@@ -21,7 +22,9 @@ class ReviewsController < ApplicationController
     end
 
     def update
-    
+        review = Review.find(params[:id])
+        review.update(review_params)
+
         if review.update(review_params)
             render json: ReviewBlueprint.render(review, view: :normal), status: :ok
         else
@@ -30,6 +33,9 @@ class ReviewsController < ApplicationController
     end
 
     def destroy
+        review = Review.find(params[:id])
+        review.destroy
+
         if review.destroy
             render json: nil, status: :ok
         else

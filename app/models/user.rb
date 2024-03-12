@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_many :reviews
     has_many :items
 
-    #has_secure_password
+    has_secure_password
 
     validates :first_name, presence: true
     validates :last_name, presence: true
